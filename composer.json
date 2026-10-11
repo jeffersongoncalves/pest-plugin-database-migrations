@@ -1,0 +1,59 @@
+{
+    "name": "jeffersongoncalves/pest-plugin-database-migrations",
+    "description": "Load a package's migrations in tests in the exact order declared by its spatie/laravel-package-tools ServiceProvider",
+    "keywords": [
+        "laravel",
+        "pest",
+        "pest-plugin",
+        "migrations",
+        "testbench",
+        "testing"
+    ],
+    "homepage": "https://github.com/jeffersongoncalves/pest-plugin-database-migrations",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Jefferson Gonçalves",
+            "email": "gerson.simao.92@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "illuminate/support": "^11.0|^12.0|^13.0",
+        "spatie/laravel-package-tools": "^1.15"
+    },
+    "require-dev": {
+        "larastan/larastan": "^3.0",
+        "laravel/pint": "^1.24",
+        "orchestra/testbench": "^9.0|^10.0|^11.0",
+        "pestphp/pest": "^3.0|^4.0",
+        "pestphp/pest-plugin-laravel": "^3.0|^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "JeffersonGoncalves\\PestPluginDatabaseMigrations\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "JeffersonGoncalves\\PestPluginDatabaseMigrations\\Tests\\": "tests/",
+            "JeffersonGoncalves\\PestPluginDatabaseMigrations\\Tests\\Fixtures\\": "tests/Fixtures/src/"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/pest",
+        "format": "vendor/bin/pint",
+        "analyse": "vendor/bin/phpstan analyse"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
