@@ -7,13 +7,20 @@ use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class FixtureServiceProvider extends PackageServiceProvider
 {
+    /**
+     * Overrides the declared migrations, to simulate another checkout of the same provider.
+     *
+     * @var list<string>|null
+     */
+    public static ?array $migrations = null;
+
     public function configurePackage(Package $package): void
     {
         // Alphabetical order would run "create_posts_table" before "create_authors_table" and
         // "add_bio_to_authors" first of all, which fails.
         $package
             ->name('fixture')
-            ->hasMigrations([
+            ->hasMigrations(self::$migrations ?? [
                 'create_authors_table',
                 'create_posts_table',
                 'add_bio_to_authors',

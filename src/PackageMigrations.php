@@ -51,7 +51,11 @@ final class PackageMigrations
      */
     public static function stage(Application $app, string ...$providers): string
     {
-        $dir = sys_get_temp_dir().'/pest-plugin-database-migrations/'.md5(implode('|', $providers));
+        $files = self::files($app, ...$providers);
+
+        // Keyed by the resolved paths too: two checkouts (or vendor copies) of the same
+        // provider must not share a dir, or each one deletes the other's files as stale.
+        $dir = sys_get_temp_dir().'/pest-plugin-database-migrations/'.md5(implode('|', [...$providers, ...$files]));
 
         if (! is_dir($dir)) {
             mkdir($dir, 0755, true);
@@ -59,7 +63,7 @@ final class PackageMigrations
 
         $targets = [];
 
-        foreach (self::files($app, ...$providers) as $index => $file) {
+        foreach ($files as $index => $file) {
             $name = preg_replace('/\.php(\.stub)?$/', '', basename($file));
             $target = $targets[] = sprintf('%s/%04d_%s.php', $dir, $index, $name);
 
