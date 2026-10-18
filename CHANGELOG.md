@@ -2,6 +2,10 @@
 
 All notable changes to `pest-plugin-database-migrations` will be documented in this file.
 
+## 1.0.1 - 2026-10-18
+
+Fix: the staging directory is now keyed by the resolved migration paths too, so separate checkouts or vendor copies of the same provider no longer delete each other's staged files when their suites run at the same time. Parallel workers of one suite still share a directory.
+
 ## 1.0.0 - 2026-10-11
 
 First release.
